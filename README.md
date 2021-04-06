@@ -16,7 +16,7 @@ More information at [agenorcoin.com](https://agenorcoin.com/) Join the community
 <tr><td>Block Time</td><td>2 Min</td></tr>
 <tr><td>Difficulty Retargeting</td><td>Every Block</td></tr>
 <tr><td>Max Coin Supply (PoW Phase)</td><td>5,000,000 AGE</td></tr>
-<tr><td>Max Coin Supply (PoS Phase)</td><td>95,000,000 AGE</td></tr>
+<tr><td>Max Coin Supply (PoS Phase)</td><td>90,000,000 AGE</td></tr>
 <tr><td>Premine</td><td>5,000,000 AGE*</td></tr>
 </table>
 
