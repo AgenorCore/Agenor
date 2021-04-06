@@ -37,9 +37,6 @@ More information at [agenorcoin.com](https://agenorcoin.com/) Join the community
 
 ### PoS Rewards Breakdown
 
-MN Reward : 80%
-POS Rewrad : 20%
-Halving : 250,000 Block
 <table>
 <th>Block Height</th><th>Masternodes</th><th>Staking</th><th>Block Reward</th><th>Halving</th>
 <tr><td>100,001-∞</td><td>80%</td><td>20%</td><td>50 AGE</td><td>250,000</td></tr>
