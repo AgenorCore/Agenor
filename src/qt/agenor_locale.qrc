@@ -1,0 +1,18 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="de">locale/agenor_de.qm</file>
+        <file alias="en">locale/agenor_en.qm</file>
+        <file alias="en_US">locale/agenor_en_US.qm</file>
+        <file alias="es">locale/agenor_es.qm</file>
+        <file alias="es_ES">locale/agenor_es_ES.qm</file>
+        <file alias="fr_FR">locale/agenor_fr_FR.qm</file>
+        <file alias="hr_HR">locale/agenor_hr_HR.qm</file>
+        <file alias="it">locale/agenor_it.qm</file>
+        <file alias="ko_KR">locale/agenor_ko_KR.qm</file>
+        <file alias="nl">locale/agenor_nl.qm</file>
+        <file alias="pl">locale/agenor_pl.qm</file>
+        <file alias="ru">locale/agenor_ru.qm</file>
+        <file alias="tr">locale/agenor_tr.qm</file>
+        <file alias="zh_CN">locale/agenor_zh_CN.qm</file>
+    </qresource>
+</RCC>

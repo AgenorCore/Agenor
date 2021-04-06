@@ -1,0 +1,6 @@
+usr/local/bin/agenor-qt usr/bin
+share/pixmaps/agenor32.xpm usr/share/pixmaps
+share/pixmaps/agenor16.xpm usr/share/pixmaps
+share/pixmaps/agenor128.png usr/share/pixmaps
+debian/agenor-qt.desktop usr/share/applications
+debian/agenor-qt.protocol usr/share/kde4/services/

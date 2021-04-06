@@ -1,0 +1,157 @@
+
+## <summary>policy for agenor</summary>
+
+
+########################################
+## <summary>
+##	Transition to agenor.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`agenor_domtrans',`
+	gen_require(`
+		type agenor_t, agenor_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, agenor_exec_t, agenor_t)
+')
+
+
+########################################
+## <summary>
+##	Execute agenor server in the agenor domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`agenor_initrc_domtrans',`
+	gen_require(`
+		type agenor_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, agenor_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search agenor lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`agenor_search_lib',`
+	gen_require(`
+		type agenor_var_lib_t;
+	')
+
+	allow $1 agenor_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read agenor lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`agenor_read_lib_files',`
+	gen_require(`
+		type agenor_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, agenor_var_lib_t, agenor_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage agenor lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`agenor_manage_lib_files',`
+	gen_require(`
+		type agenor_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, agenor_var_lib_t, agenor_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage agenor lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`agenor_manage_lib_dirs',`
+	gen_require(`
+		type agenor_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, agenor_var_lib_t, agenor_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a agenor environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`agenor_admin',`
+	gen_require(`
+		type agenor_t;
+		type agenor_initrc_exec_t;
+		type agenor_var_lib_t;
+	')
+
+	allow $1 agenor_t:process { ptrace signal_perms };
+	ps_process_pattern($1, agenor_t)
+
+	agenor_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 agenor_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, agenor_var_lib_t)
+
+')
+

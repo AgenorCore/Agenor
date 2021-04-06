@@ -1,0 +1,8 @@
+/usr/bin/agenor-cli		--	gen_context(system_u:object_r:agenor_exec_t,s0)
+/usr/sbin/agenord		--	gen_context(system_u:object_r:agenor_exec_t,s0)
+/usr/lib(64)?/agenor/agenord		--	gen_context(system_u:object_r:agenor_exec_t,s0)
+
+/etc/agenor(/.*)?		gen_context(system_u:object_r:agenor_conf_t,s0)
+/var/lib/agenor(/.*)?		gen_context(system_u:object_r:agenor_var_lib_t,s0)
+
+(/var)?/run/agenord(/.*)?   gen_context(system_u:object_r:agenor_var_run_t,s0)

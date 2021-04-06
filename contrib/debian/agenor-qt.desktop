@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Agenor Core
+Comment=Agenor P2P Cryptocurrency
+Comment[fr]=Agenor, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Agenor, eşten eşe kriptografik sanal para birimi
+Exec=agenor-qt %u
+Terminal=false
+Type=Application
+Icon=agenor128
+MimeType=x-scheme-handler/agenor;
+Categories=Office;Finance;
+StartupWMClass=AgenorCoin-qt

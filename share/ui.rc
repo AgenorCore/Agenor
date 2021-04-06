@@ -1,0 +1,5 @@
+bitcoin               ICON    "pixmaps/agenor.ico"
+
+#include "wx/msw/wx.rc"
+
+favicon               ICON    "pixmaps/favicon.ico"

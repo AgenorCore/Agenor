@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=Agenor Core Daemon SNAP
+Comment=testnet
+GenericName=Agenor Digital Currency Daemon Client testnet network
+Exec=agenor-core.daemon-testnet %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/agenor_testnet.png
+MimeType=x-scheme-handler/age;
+Categories=X-Office;X-Finance;
+Keywords=internet;agenor;zage;core;wallet;daemon;testnet;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

@@ -1,0 +1,723 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/agenor-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# agenor qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/agenor/forms/loadingdialog.ui \
+  qt/agenor/forms/snackbar.ui \
+  qt/agenor/forms/navmenuwidget.ui \
+  qt/agenor/forms/lockunlock.ui \
+  qt/agenor/forms/expandablebutton.ui \
+  qt/agenor/forms/receivedialog.ui \
+  qt/agenor/forms/topbar.ui \
+  qt/agenor/forms/txrow.ui \
+  qt/agenor/forms/dashboardwidget.ui \
+  qt/agenor/forms/addresslabelrow.ui \
+  qt/agenor/forms/contactdropdownrow.ui \
+  qt/agenor/forms/mninfodialog.ui \
+  qt/agenor/forms/optionbutton.ui \
+  qt/agenor/forms/masternodewizarddialog.ui \
+  qt/agenor/forms/mnrow.ui \
+  qt/agenor/forms/masternodeswidget.ui \
+  qt/agenor/forms/myaddressrow.ui \
+  qt/agenor/forms/csrow.ui \
+  qt/agenor/forms/sendchangeaddressdialog.ui \
+  qt/agenor/forms/sendconfirmdialog.ui \
+  qt/agenor/forms/sendcustomfeedialog.ui \
+  qt/agenor/forms/sendchangeaddressdialog.ui \
+  qt/agenor/forms/sendmultirow.ui \
+  qt/agenor/forms/send.ui \
+  qt/agenor/forms/addnewaddressdialog.ui \
+  qt/agenor/forms/addnewcontactdialog.ui \
+  qt/agenor/forms/requestdialog.ui \
+  qt/agenor/forms/receivewidget.ui \
+  qt/agenor/forms/tooltipmenu.ui \
+  qt/agenor/forms/addresseswidget.ui \
+  qt/agenor/forms/defaultdialog.ui \
+  qt/agenor/forms/coldstakingwidget.ui \
+  qt/agenor/settings/forms/settingsbackupwallet.ui \
+  qt/agenor/settings/forms/settingsexportcsv.ui \
+  qt/agenor/settings/forms/settingsbittoolwidget.ui \
+  qt/agenor/settings/forms/settingsconsolewidget.ui \
+  qt/agenor/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/agenor/settings/forms/settingsfaqwidget.ui \
+  qt/agenor/settings/forms/settingsinformationwidget.ui \
+  qt/agenor/settings/forms/settingsmainoptionswidget.ui \
+  qt/agenor/settings/forms/settingsmultisenddialog.ui \
+  qt/agenor/settings/forms/settingsmultisendwidget.ui \
+  qt/agenor/settings/forms/settingssignmessagewidgets.ui \
+  qt/agenor/settings/forms/settingswalletoptionswidget.ui \
+  qt/agenor/settings/forms/settingswalletrepairwidget.ui \
+  qt/agenor/settings/forms/settingswidget.ui \
+  qt/agenor/forms/welcomecontentwidget.ui \
+  qt/agenor/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/agenor/moc_agenorgui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/agenor/moc_loadingdialog.cpp \
+  qt/agenor/moc_pwidget.cpp \
+  qt/agenor/moc_focuseddialog.cpp \
+  qt/agenor/moc_snackbar.cpp \
+  qt/agenor/moc_navmenuwidget.cpp \
+  qt/agenor/moc_lockunlock.cpp \
+  qt/agenor/moc_expandablebutton.cpp \
+  qt/agenor/moc_furabstractlistitemdelegate.cpp \
+  qt/agenor/moc_receivedialog.cpp \
+  qt/agenor/moc_pfborderimage.cpp \
+  qt/agenor/moc_topbar.cpp \
+  qt/agenor/moc_txrow.cpp \
+  qt/agenor/moc_dashboardwidget.cpp \
+  qt/agenor/moc_addresslabelrow.cpp \
+  qt/agenor/moc_contactdropdownrow.cpp \
+  qt/agenor/moc_mninfodialog.cpp \
+  qt/agenor/moc_optionbutton.cpp \
+  qt/agenor/moc_coldstakingmodel.cpp \
+  qt/agenor/moc_mnmodel.cpp \
+  qt/agenor/moc_masternodewizarddialog.cpp \
+  qt/agenor/moc_mnrow.cpp \
+  qt/agenor/moc_masternodeswidget.cpp \
+  qt/agenor/moc_myaddressrow.cpp \
+  qt/agenor/moc_csrow.cpp \
+  qt/agenor/moc_contactsdropdown.cpp \
+  qt/agenor/moc_sendchangeaddressdialog.cpp \
+  qt/agenor/moc_sendconfirmdialog.cpp \
+  qt/agenor/moc_sendcustomfeedialog.cpp \
+  qt/agenor/moc_sendchangeaddressdialog.cpp \
+  qt/agenor/moc_sendmultirow.cpp \
+  qt/agenor/moc_send.cpp \
+  qt/agenor/moc_addnewaddressdialog.cpp \
+  qt/agenor/moc_addnewcontactdialog.cpp \
+  qt/agenor/moc_requestdialog.cpp \
+  qt/agenor/moc_receivewidget.cpp \
+  qt/agenor/moc_tooltipmenu.cpp \
+  qt/agenor/moc_addresseswidget.cpp \
+  qt/agenor/moc_defaultdialog.cpp \
+  qt/agenor/moc_coldstakingwidget.cpp \
+  qt/agenor/settings/moc_settingsbackupwallet.cpp \
+  qt/agenor/settings/moc_settingsexportcsv.cpp \
+  qt/agenor/settings/moc_settingsbittoolwidget.cpp \
+  qt/agenor/settings/moc_settingsconsolewidget.cpp \
+  qt/agenor/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/agenor/settings/moc_settingsfaqwidget.cpp \
+  qt/agenor/settings/moc_settingsinformationwidget.cpp \
+  qt/agenor/settings/moc_settingsmainoptionswidget.cpp \
+  qt/agenor/settings/moc_settingsmultisenddialog.cpp \
+  qt/agenor/settings/moc_settingsmultisendwidget.cpp \
+  qt/agenor/settings/moc_settingssignmessagewidgets.cpp \
+  qt/agenor/settings/moc_settingswalletoptionswidget.cpp \
+  qt/agenor/settings/moc_settingswalletrepairwidget.cpp \
+  qt/agenor/settings/moc_settingswidget.cpp \
+  qt/agenor/moc_welcomecontentwidget.cpp \
+  qt/agenor/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/agenor.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/agenor/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_agenor.cpp
+QT_QRC = qt/agenor.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_agenor_locale.cpp
+QT_QRC_LOCALE = qt/agenor_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/agenor/agenorgui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/agenor/prunnable.h \
+  qt/agenor/pfborderimage.h \
+  qt/agenor/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/agenor/pwidget.h \
+  qt/agenor/focuseddialog.h \
+  qt/agenor/guitransactionsutils.h \
+  qt/agenor/snackbar.h \
+  qt/agenor/navmenuwidget.h \
+  qt/agenor/lockunlock.h \
+  qt/agenor/receivedialog.h \
+  qt/agenor/furlistrow.h \
+  qt/agenor/furabstractlistitemdelegate.h \
+  qt/agenor/txviewholder.h \
+  qt/agenor/qtutils.h \
+  qt/agenor/expandablebutton.h \
+  qt/agenor/topbar.h \
+  qt/agenor/txrow.h \
+  qt/agenor/addressholder.h \
+  qt/agenor/addressfilterproxymodel.h \
+  qt/agenor/dashboardwidget.h \
+  qt/agenor/addresslabelrow.h \
+  qt/agenor/contactdropdownrow.h \
+  qt/agenor/mninfodialog.h \
+  qt/agenor/optionbutton.h \
+  qt/agenor/coldstakingmodel.h \
+  qt/agenor/mnmodel.h \
+  qt/agenor/masternodewizarddialog.h \
+  qt/agenor/mnrow.h \
+  qt/agenor/masternodeswidget.h \
+  qt/agenor/myaddressrow.h \
+  qt/agenor/csrow.h \
+  qt/agenor/contactsdropdown.h \
+  qt/agenor/sendchangeaddressdialog.h \
+  qt/agenor/sendconfirmdialog.h \
+  qt/agenor/sendcustomfeedialog.h \
+  qt/agenor/sendchangeaddressdialog.h \
+  qt/agenor/sendmultirow.h \
+  qt/agenor/send.h \
+  qt/agenor/addnewaddressdialog.h \
+  qt/agenor/addnewcontactdialog.h \
+  qt/agenor/requestdialog.h \
+  qt/agenor/receivewidget.h \
+  qt/agenor/tooltipmenu.h \
+  qt/agenor/addresseswidget.h \
+  qt/agenor/defaultdialog.h \
+  qt/agenor/coldstakingwidget.h \
+  qt/agenor/settings/settingsbackupwallet.h \
+  qt/agenor/settings/settingsexportcsv.h \
+  qt/agenor/settings/settingsbittoolwidget.h \
+  qt/agenor/settings/settingsconsolewidget.h \
+  qt/agenor/settings/settingsdisplayoptionswidget.h \
+  qt/agenor/settings/settingsfaqwidget.h \
+  qt/agenor/settings/settingsinformationwidget.h \
+  qt/agenor/settings/settingsmainoptionswidget.h \
+  qt/agenor/settings/settingsmultisenddialog.h \
+  qt/agenor/settings/settingsmultisendwidget.h \
+  qt/agenor/settings/settingssignmessagewidgets.h \
+  qt/agenor/settings/settingswalletoptionswidget.h \
+  qt/agenor/settings/settingswalletrepairwidget.h \
+  qt/agenor/settings/settingswidget.h \
+  qt/agenor/welcomecontentwidget.h \
+  qt/agenor/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/agenor/res/img/bg-dashboard-banner.png \
+  qt/agenor/res/img/bg-multi-number-dark.svg \
+  qt/agenor/res/img/ic-check-locked.svg \
+  qt/agenor/res/img/ic-nav-address.svg \
+  qt/agenor/res/img/ic-update.svg \
+  qt/agenor/res/img/bg-multi-number.svg \
+  qt/agenor/res/img/ic-check-mint-off.svg \
+  qt/agenor/res/img/ic-nav-cold-staking.svg \
+  qt/agenor/res/img/ic-nav-cold-staking-active.svg \
+  qt/agenor/res/img/ic-nav-dashboard-active.svg \
+  qt/agenor/res/img/ic-wallet-status-locked.svg \
+  qt/agenor/res/img/bg-splash.svg \
+  qt/agenor/res/img/bg-splash.png \
+  qt/agenor/res/img/ic-check-mint.svg \
+  qt/agenor/res/img/ic-nav-dashboard-hover.svg \
+  qt/agenor/res/img/ic-wallet-status-staking.svg \
+  qt/agenor/res/img/ic-check-peers-off.svg \
+  qt/agenor/res/img/ic-nav-dashboard.svg \
+  qt/agenor/res/img/ic-wallet-status-unlocked.svg \
+  qt/agenor/res/img/ic-check-peers.svg \
+  qt/agenor/res/img/ic-nav-master-active.svg \
+  qt/agenor/res/img/ic-watch-password-white.svg \
+  qt/agenor/res/img/bg-welcome-container.jpg \
+  qt/agenor/res/img/bg-welcome-container.png \
+  qt/agenor/res/img/bg-welcome-container.svg \
+  qt/agenor/res/img/bg-welcome-container@2x.png \
+  qt/agenor/res/img/bg-welcome-container@3x.png \
+  qt/agenor/res/img/ic-check-staking-off.svg \
+  qt/agenor/res/img/ic-nav-master-hover.svg \
+  qt/agenor/res/img/ic-watch-password.svg \
+  qt/agenor/res/img/bg-welcome.jpg \
+  qt/agenor/res/img/bg-welcome.svg \
+  qt/agenor/res/img/bg-welcome@2x.jpg \
+  qt/agenor/res/img/bg-welcome@3x.jpg \
+  qt/agenor/res/img/bg-welcome.png \
+  qt/agenor/res/img/ic-check-staking.svg \
+  qt/agenor/res/img/ic-nav-master.svg \
+  qt/agenor/res/img/img-dashboard-banner.jpg \
+  qt/agenor/res/img/btn-radio-active.svg \
+  qt/agenor/res/img/ic-check-sync-off.svg \
+  qt/agenor/res/img/ic-nav-privacy-active.svg \
+  qt/agenor/res/img/img-empty-contacts.svg \
+  qt/agenor/res/img/btn-radio-off.svg \
+  qt/agenor/res/img/ic-check-sync.png \
+  qt/agenor/res/img/ic-nav-privacy-hover.svg \
+  qt/agenor/res/img/img-empty-dark-contacts.svg \
+  qt/agenor/res/img/ic-contact-arrow-down.svg \
+  qt/agenor/res/img/ic-contact-arrow-down-white.svg \
+  qt/agenor/res/img/ic-check-sync.svg \
+  qt/agenor/res/img/ic-check-faq.svg \
+  qt/agenor/res/img/ic-nav-privacy.svg \
+  qt/agenor/res/img/img-empty-dark-error.svg \
+  qt/agenor/res/img/ic-add-label.svg \
+  qt/agenor/res/img/ic-pending.svg \
+  qt/agenor/res/img/ic-check-theme-dark.svg \
+  qt/agenor/res/img/ic-nav-receive-active.svg \
+  qt/agenor/res/img/img-empty-dark-masternode.svg \
+  qt/agenor/res/img/ic-add-liliac.svg \
+  qt/agenor/res/img/ic-check-theme-light.svg \
+  qt/agenor/res/img/ic-nav-receive-hover.svg \
+  qt/agenor/res/img/img-empty-dark-multisend.svg \
+  qt/agenor/res/img/ic-add-purple.svg \
+  qt/agenor/res/img/ic-check-white.svg \
+  qt/agenor/res/img/ic-nav-receive.svg \
+  qt/agenor/res/img/img-empty-dark-peers.svg \
+  qt/agenor/res/img/ic-add.svg \
+  qt/agenor/res/img/ic-check.svg \
+  qt/agenor/res/img/ic-nav-send-active.svg \
+  qt/agenor/res/img/img-empty-dark-staking-off.svg \
+  qt/agenor/res/img/img-empty-dark-staking-on.svg \
+  qt/agenor/res/img/ic-address-book-grey.svg \
+  qt/agenor/res/img/ic-chevron-left.svg \
+  qt/agenor/res/img/ic-nav-send-hover.svg \
+  qt/agenor/res/img/img-empty-dark-transactions.svg \
+  qt/agenor/res/img/ic-address-book-white.svg \
+  qt/agenor/res/img/ic-chevron-right.svg \
+  qt/agenor/res/img/ic-nav-send.svg \
+  qt/agenor/res/img/img-empty-error.svg \
+  qt/agenor/res/img/ic-address-book.svg \
+  qt/agenor/res/img/ic-clear-liliac.svg \
+  qt/agenor/res/img/ic-nav-settings-active.svg \
+  qt/agenor/res/img/img-empty-masternode.svg \
+  qt/agenor/res/img/ic-address-send-white.svg \
+  qt/agenor/res/img/ic-clear-purple.svg \
+  qt/agenor/res/img/ic-nav-settings-hover.svg \
+  qt/agenor/res/img/img-empty-multisend.svg \
+  qt/agenor/res/img/ic-address-send.svg \
+  qt/agenor/res/img/ic-close-white.svg \
+  qt/agenor/res/img/ic-nav-settings.svg \
+  qt/agenor/res/img/img-empty-peers.svg \
+  qt/agenor/res/img/img-empty-privacy.svg \
+  qt/agenor/res/img/img-empty-privacy-dark.svg \
+  qt/agenor/res/img/ic-arrow-drop-down-white.svg \
+  qt/agenor/res/img/ic-close.svg \
+  qt/agenor/res/img/ic-radio-liliac-on.svg \
+  qt/agenor/res/img/img-empty-staking-off.svg \
+  qt/agenor/res/img/ic-arrow-drop-down.svg \
+  qt/agenor/res/img/ic-coin-age.svg \
+  qt/agenor/res/img/ic-receive-off.svg \
+  qt/agenor/res/img/img-empty-staking-on.svg \
+  qt/agenor/res/img/ic-arrow-drop-up-white.svg \
+  qt/agenor/res/img/ic-coin-zage.png \
+  qt/agenor/res/img/ic-receive-on.svg \
+  qt/agenor/res/img/img-empty-transactions.svg \
+  qt/agenor/res/img/ic-arrow-drop-up.svg \
+  qt/agenor/res/img/ic-coin-zage.svg \
+  qt/agenor/res/img/ic-received.svg \
+  qt/agenor/res/img/img-logo-agenor.png \
+  qt/agenor/res/img/ic-arrow-drop-white-down.svg \
+  qt/agenor/res/img/ic-combo-box.svg \
+  qt/agenor/res/img/ic-send.svg \
+  qt/agenor/res/img/img-logo-agenor@2x.png \
+  qt/agenor/res/img/ic-arrow-purple-down.svg \
+  qt/agenor/res/img/ic-connect.svg \
+  qt/agenor/res/img/ic-submenu-lock.svg \
+  qt/agenor/res/img/img-logo-agenor@3x.png \
+  qt/agenor/res/img/img-logo-agenor.svg \
+  qt/agenor/res/img/ic-arrow-right-white.svg \
+  qt/agenor/res/img/ic-arrow-left-white.svg \
+  qt/agenor/res/img/ic-arrow-left.svg \
+  qt/agenor/res/img/ic-copy-liliac.svg \
+  qt/agenor/res/img/ic-submenu-staking.svg \
+  qt/agenor/res/img/img-nav-logo-agenor.png \
+  qt/agenor/res/img/ic-arrow-right.svg \
+  qt/agenor/res/img/ic-copy.svg \
+  qt/agenor/res/img/ic-copy-big.svg \
+  qt/agenor/res/img/ic-copy-big-white.svg \
+  qt/agenor/res/img/ic-submenu-unlock.svg \
+  qt/agenor/res/img/img-nav-logo.png \
+  qt/agenor/res/img/ic-arrow-white-left.svg \
+  qt/agenor/res/img/ic-exit.svg \
+  qt/agenor/res/img/ic-switch-liliac-on.svg \
+  qt/agenor/res/img/img-nav-logo.svg \
+  qt/agenor/res/img/ic-arrow-white-right.svg \
+  qt/agenor/res/img/ic-expand.svg \
+  qt/agenor/res/img/ic-switch-off.svg \
+  qt/agenor/res/img/img-qr-test-big.png \
+  qt/agenor/res/img/ic-check-active.svg \
+  qt/agenor/res/img/ic-folder.svg \
+  qt/agenor/res/img/ic-switch-on.svg \
+  qt/agenor/res/img/img-qr-test.png \
+  qt/agenor/res/img/ic-check-box.svg \
+  qt/agenor/res/img/ic-check-box-dark-active.svg \
+  qt/agenor/res/img/ic-check-box-indeterminate.svg \
+  qt/agenor/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/agenor/res/img/ic-label-liliac.svg \
+  qt/agenor/res/img/ic-transaction-warning.svg \
+  qt/agenor/res/img/ic-transaction-mint.svg \
+  qt/agenor/res/img/ic-transaction-mint-inactive.svg \
+  qt/agenor/res/img/ic-check-cold-staking.svg \
+  qt/agenor/res/img/ic-check-cold-staking-off.svg \
+  qt/agenor/res/img/ic-check-cold-staking-enabled.svg \
+  qt/agenor/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/agenor/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/agenor/res/img/img-qr.svg \
+  qt/agenor/res/img/ic-check-connect-off.svg \
+  qt/agenor/res/img/ic-check-tor-off.svg \
+  qt/agenor/res/img/ic-check-tor.svg \
+  qt/agenor/res/img/ic-label.svg \
+  qt/agenor/res/img/ic-transaction-received.svg \
+  qt/agenor/res/img/dark/ic-transaction-received.svg \
+  qt/agenor/res/img/dark/ic-transaction-warning.svg \
+  qt/agenor/res/img/dark/ic-transaction-mint.svg \
+  qt/agenor/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/agenor/res/img/ic-transaction-received-inactive.svg \
+  qt/agenor/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/agenor/res/img/img-welcome-step1.png \
+  qt/agenor/res/img/ic-check-connect.svg \
+  qt/agenor/res/img/ic-menu-hover.svg \
+  qt/agenor/res/img/ic-transaction-sent.svg \
+  qt/agenor/res/img/ic-transaction-sent-inactive.svg \
+  qt/agenor/res/img/dark/ic-transaction-sent.svg \
+  qt/agenor/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/agenor/res/img/img-welcome-step2.png \
+  qt/agenor/res/img/ic-check-dark.svg \
+  qt/agenor/res/img/ic-mint.svg \
+  qt/agenor/res/img/ic-transaction-staked.svg \
+  qt/agenor/res/img/ic-transaction-staked-inactive.svg \
+  qt/agenor/res/img/dark/ic-transaction-staked.svg \
+  qt/agenor/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/agenor/res/img/img-welcome-step3.png \
+  qt/agenor/res/img/ic-check-liliac-on.svg \
+  qt/agenor/res/img/ic-nav-address-active.svg \
+  qt/agenor/res/img/ic-unlock-staking.svg \
+  qt/agenor/res/img/img-welcome-step4.png \
+  qt/agenor/res/img/ic-check-locked-off.svg \
+  qt/agenor/res/img/ic-nav-address-hover.svg \
+  qt/agenor/res/img/ic-update-liliac.svg \
+  qt/agenor/res/img/ic-arrow-drop-down-purple.svg \
+  qt/agenor/res/img/ic-arrow-drop-up-purple.svg \
+  qt/agenor/res/img/ic-check-liliac-indeterminate.svg \
+  qt/agenor/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/agenor/res/img/ic-transaction-stake-delegated.svg \
+  qt/agenor/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/agenor/res/img/ic-transaction-stake-hot.svg \
+  qt/agenor/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/agenor/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/agenor/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/agenor/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/agenor/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/agenor/res/img/ic-transaction-cs-contract.svg \
+  qt/agenor/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/agenor/res/img/ic-check-box-indeterminate.svg \
+  qt/agenor/res/img/ani-loading-dark.gif \
+  qt/agenor/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/agenor/agenorgui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/agenor/loadingdialog.cpp \
+  qt/agenor/pwidget.cpp \
+  qt/agenor/focuseddialog.cpp \
+  qt/agenor/guitransactionsutils.cpp \
+  qt/agenor/snackbar.cpp \
+  qt/agenor/navmenuwidget.cpp \
+  qt/agenor/lockunlock.cpp \
+  qt/agenor/receivedialog.cpp \
+  qt/agenor/furabstractlistitemdelegate.cpp \
+  qt/agenor/txviewholder.cpp \
+  qt/agenor/qtutils.cpp \
+  qt/agenor/expandablebutton.cpp \
+  qt/agenor/topbar.cpp \
+  qt/agenor/txrow.cpp \
+  qt/agenor/addressholder.cpp \
+  qt/agenor/addressfilterproxymodel.cpp \
+  qt/agenor/dashboardwidget.cpp \
+  qt/agenor/addresslabelrow.cpp \
+  qt/agenor/contactdropdownrow.cpp \
+  qt/agenor/contactsdropdown.cpp \
+  qt/agenor/optionbutton.cpp \
+  qt/agenor/mninfodialog.cpp \
+  qt/agenor/coldstakingmodel.cpp \
+  qt/agenor/mnmodel.cpp \
+  qt/agenor/masternodewizarddialog.cpp \
+  qt/agenor/mnrow.cpp \
+  qt/agenor/masternodeswidget.cpp \
+  qt/agenor/myaddressrow.cpp \
+  qt/agenor/csrow.cpp \
+  qt/agenor/sendchangeaddressdialog.cpp \
+  qt/agenor/sendconfirmdialog.cpp \
+  qt/agenor/sendcustomfeedialog.cpp \
+  qt/agenor/sendchangeaddressdialog.cpp \
+  qt/agenor/sendmultirow.cpp \
+  qt/agenor/send.cpp \
+  qt/agenor/addnewaddressdialog.cpp \
+  qt/agenor/addnewcontactdialog.cpp \
+  qt/agenor/requestdialog.cpp \
+  qt/agenor/receivewidget.cpp \
+  qt/agenor/tooltipmenu.cpp \
+  qt/agenor/addresseswidget.cpp \
+  qt/agenor/defaultdialog.cpp \
+  qt/agenor/coldstakingwidget.cpp \
+  qt/agenor/settings/settingsbackupwallet.cpp \
+  qt/agenor/settings/settingsexportcsv.cpp \
+  qt/agenor/settings/settingsbittoolwidget.cpp \
+  qt/agenor/settings/settingsconsolewidget.cpp \
+  qt/agenor/settings/settingsdisplayoptionswidget.cpp \
+  qt/agenor/settings/settingsfaqwidget.cpp \
+  qt/agenor/settings/settingsinformationwidget.cpp \
+  qt/agenor/settings/settingsmainoptionswidget.cpp \
+  qt/agenor/settings/settingsmultisenddialog.cpp \
+  qt/agenor/settings/settingsmultisendwidget.cpp \
+  qt/agenor/settings/settingssignmessagewidgets.cpp \
+  qt/agenor/settings/settingswalletoptionswidget.cpp \
+  qt/agenor/settings/settingswalletrepairwidget.cpp \
+  qt/agenor/settings/settingswidget.cpp \
+  qt/agenor/welcomecontentwidget.cpp \
+  qt/agenor/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/agenor/res/css/style_dark.css \
+  qt/agenor/res/css/style_light.css
+
+BITCOIN_RC = qt/res/agenor-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_agenor_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# agenor-qt binary #
+qt_agenor_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_agenor_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_agenor_qt_SOURCES = qt/agenor.cpp
+if TARGET_DARWIN
+  qt_agenor_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_agenor_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_agenor_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_agenor_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_agenor_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_agenor_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_agenor_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_agenor_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/agenorstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/agenorstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/agenor.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/agenor_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name agenor_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name agenor $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_agenor_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+agenor_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_agenor_qt_OBJECTS) qt/agenor-qt$(EXEEXT) $(LIBBITCOINQT)
+
+agenor_qt : qt/agenor-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/agenor_de.ts \
+  qt/locale/agenor_en.ts \
+  qt/locale/agenor_en_US.ts \
+  qt/locale/agenor_es.ts \
+  qt/locale/agenor_es_ES.ts \
+  qt/locale/agenor_fr_FR.ts \
+  qt/locale/agenor_hr_HR.ts \
+  qt/locale/agenor_it.ts \
+  qt/locale/agenor_ko_KR.ts \
+  qt/locale/agenor_nl.ts \
+  qt/locale/agenor_pl.ts \
+  qt/locale/agenor_ru.ts \
+  qt/locale/agenor_tr.ts \
+  qt/locale/agenor_zh_CN.ts

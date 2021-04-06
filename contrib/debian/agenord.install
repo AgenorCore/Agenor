@@ -1,0 +1,3 @@
+usr/local/bin/agenord usr/bin
+usr/local/bin/agenor-cli usr/bin
+debian/examples/agenor.conf etc/agenor
